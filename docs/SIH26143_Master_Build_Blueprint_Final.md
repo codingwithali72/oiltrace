@@ -264,7 +264,7 @@ for epoch in range(20):
 print(f"Done. Best IoU: {best_iou:.3f}")
 ```
 
-**Cell 6 — download the weights to your local machine** (or just keep them in Drive and mount Drive later from your `ml-service`).
+**Cell 6 — download the weights to your local machine** (or just keep them in Drive and mount Drive later from your `ml_service`).
 
 **Sanity check before moving on:** load one validation image, run it through the model, and visually plot the prediction next to the ground truth mask in the same Colab notebook (`matplotlib.pyplot.imshow`) — confirm by eye that it's actually learning the right shape before trusting the IoU number alone.
 
