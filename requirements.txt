@@ -1,0 +1,5 @@
+rasterio
+numpy
+pandas
+requests
+py7zr
