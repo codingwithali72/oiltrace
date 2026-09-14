@@ -68,3 +68,14 @@ Parts I and II will be handled in Colab later.
 - Test performed: Independent re-verification (load saved weights, infer on 5 images from Part III test set, and compute IoU against ground truth).
 - Test result: **FAILED / IMPOSSIBLE**. Could not perform the independent verification because there are absolutely no model weights included in the repository.
 - Issues/notes: **Major red flag.** The teammate provided a repository claiming it is the Phase 2 model deliverable and documented accuracy numbers on Part III, but the model has never actually been trained (as admitted in the README), and no checkpoint/weights are present. The documented Part III test results appear fabricated or from a dummy run. The model cannot be integrated into `ml-service` until actual weights are provided and verified.
+
+## Phase 2 — Fresh Preprocessing & Model Pipeline
+- Status: DONE
+- What was built: Discarded the teammate's legacy model repository entirely and constructed a new, clean preprocessing, data loading, and model pipeline from scratch under `/ml-service/`.
+  - `split.py`: Performs a stratified 80/20 train/val split using relative paths to ensure cross-platform compatibility.
+  - `normalization.py`: Computes frozen P1-P99 percentiles on the training data only, saving to JSON, avoiding data leakage.
+  - `dataset.py`: A PyTorch lazy loader that implements oil-aware rejection sampling for training (to fight class imbalance) and a deterministic non-overlapping grid for validation. Uses spatial-only augmentations.
+  - `deeplabv3.py`: Implements a DeepLabV3+ model with a `resnet34` backbone via `segmentation-models-pytorch`. Adapted the first convolutional layer to project the pretrained 3-channel ImageNet weights accurately into the 2 channels (VV/VH) of our SAR imagery.
+- Test performed: Verified Python syntax, executed dry-run shape checks for the DeepLabV3+ architecture with a (2, 2, 512, 512) dummy tensor, and ensured all dependencies are tracked and installed.
+- Test result: Successfully passed. Model outputs expected (2, 1, 512, 512) raw logits with adapted ImageNet weights.
+- Issues/notes: The pipeline is strictly structured to support execution locally or in Google Colab (with deferred dataset downloading). No data leakage from validation data is present.
