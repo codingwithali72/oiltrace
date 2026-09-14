@@ -98,4 +98,4 @@ Saved checkpoint to ml_service/checkpoints\best.pt
 Resumed from ml_service/checkpoints\last.pt (epoch 1)
 Dry run end-to-end verified successfully.
 ```
-- Issues/notes: The entire fresh preprocessing and training pipeline is fully structurally sound and ready for real data. Checkpointing cleanly captures optimizer states for resuming training seamlessly. **Update:** Resolved duplicate directory naming issue by deleting the redundant `ml-service` (hyphen) folder and standardizing entirely on `ml_service` (underscore) for proper Python module imports.
+- Issues/notes: The entire fresh preprocessing and training pipeline is fully structurally sound and ready for real data. Checkpointing cleanly captures optimizer states for resuming training seamlessly. **Update:** Resolved duplicate directory naming issue by deleting the redundant `ml-service` (hyphen) folder and standardizing entirely on `ml_service` (underscore) for proper Python module imports. Additionally, scrubbed the codebase (train.py, dataset.py, split.py, normalization.py) of hardcoded `ml-service` strings to prevent accidental folder recreation.

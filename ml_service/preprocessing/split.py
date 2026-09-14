@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Paths relative to project root
 DATA_ROOT = Path("dataset_raw")
-OUTPUT_DIR = Path("ml-service/data_manifests")
+OUTPUT_DIR = Path("ml_service/data_manifests")
 
 CLASSES = {
     "Oil": {

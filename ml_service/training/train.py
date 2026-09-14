@@ -7,10 +7,10 @@ import torch
 import torch.optim as optim
 from pathlib import Path
 
-# Add the ml-service folder (or parent) to sys.path to allow imports
+# Add the ml_service folder (or parent) to sys.path to allow imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-# Import model, losses, metrics, dataset (handling both 'ml-service' and 'ml_service')
+# Import model, losses, metrics, dataset (handling both 'ml_service' and 'ml_service')
 try:
     from ml_service.model.deeplabv3 import create_model
     from ml_service.model.losses import get_loss_function
@@ -18,7 +18,7 @@ try:
     from ml_service.model.dataset import OilSpillDataset
 except ModuleNotFoundError:
     # Fallback to importing directly if executed as script
-    # This works if sys.path has ml-service itself
+    # This works if sys.path has ml_service itself
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
     from model.deeplabv3 import create_model
     from model.losses import get_loss_function
@@ -35,7 +35,7 @@ def get_args():
     parser.add_argument('--resume', type=str, default=None, help="Path to checkpoint")
     parser.add_argument('--dry-run', action='store_true', help="Run 1 dummy epoch for testing")
     parser.add_argument('--data-root', type=str, default="", help="Prefix for dataset paths")
-    parser.add_argument('--checkpoint-dir', type=str, default="ml-service/checkpoints")
+    parser.add_argument('--checkpoint-dir', type=str, default="ml_service/checkpoints")
     return parser.parse_args()
 
 def save_checkpoint(path, model, optimizer, epoch, metrics_dict):
@@ -102,11 +102,11 @@ def main():
     else:
         # Load manifests (assume they exist)
         train_manifest = []
-        with open("ml-service/data_manifests/train_manifest.csv") as f:
+        with open("ml_service/data_manifests/train_manifest.csv") as f:
             train_manifest = list(csv.DictReader(f))
         
         val_manifest = []
-        with open("ml-service/data_manifests/val_manifest.csv") as f:
+        with open("ml_service/data_manifests/val_manifest.csv") as f:
             val_manifest = list(csv.DictReader(f))
             
         train_ds = OilSpillDataset(train_manifest, mode="train", root_dir=args.data_root)

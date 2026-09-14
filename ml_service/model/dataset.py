@@ -31,7 +31,7 @@ class OilSpillDataset(Dataset):
         self.root_dir = Path(root_dir)
         
         if stats_path is None:
-            stats_path = Path("ml-service/data_manifests/normalization_stats.json")
+            stats_path = Path("ml_service/data_manifests/normalization_stats.json")
         self.normalizer = Normalizer(stats_path)
         
         # Validation setup: precompute deterministic grid

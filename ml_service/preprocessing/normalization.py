@@ -5,8 +5,8 @@ import numpy as np
 import tifffile
 from pathlib import Path
 
-MANIFEST_PATH = Path("ml-service/data_manifests/train_manifest.csv")
-STATS_OUTPUT_PATH = Path("ml-service/data_manifests/normalization_stats.json")
+MANIFEST_PATH = Path("ml_service/data_manifests/train_manifest.csv")
+STATS_OUTPUT_PATH = Path("ml_service/data_manifests/normalization_stats.json")
 
 def compute_percentiles(manifest_path, sample_fraction=1.0, seed=42):
     """
