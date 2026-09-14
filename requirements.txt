@@ -3,3 +3,8 @@ numpy
 pandas
 requests
 py7zr
+torch
+torchvision
+segmentation-models-pytorch
+tifffile
+imagecodecs
